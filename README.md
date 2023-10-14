@@ -1,6 +1,6 @@
 # 0x00 AirBnB clone
 
-<img src="https://s3.amazonaws.com/intrane-projects-files/holbertonschool-higher-level_programming+/263/HBTN-hbnb-Final.png">
+![image](https://github.com/Persemutengera/AirBnB_clone/assets/123206539/e8d8fd84-a1e3-4306-95eb-185e847b52ca)
 
 ## The Overview
 
