@@ -206,7 +206,7 @@ class HBNBCommand(cmd.Cmd):
                         type_att = getattr(all_objs[key], cmd_argv[i], "")
                         try:
                             cast_val = type(type_att)(cmd_argv[i + 1])
-                        except:
+                        except NameError:
                             cast_val = type_att
                         setattr(all_objs[key], cmd_argv[i], cast_val)
                         all_objs[key].save()
