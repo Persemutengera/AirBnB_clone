@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-""" Unittest for City class
-"""
+""" Unittest for City class"""
 
 from datetime import datetime
 import io
