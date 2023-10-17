@@ -20,11 +20,11 @@ class HBNBCommand(cmd.Cmd):
     __all_117 = 0
 
     def emptyline(self):
-        """ Pass if no command is given """
+        """Pass if no command is given"""
         pass
 
     def precmd(self, line):
-        """ Edit given command to allow second type of input """
+        """ Edit given command to allow second type of input"""
         if not sys.stdin.isatty():
             print()
         if '.' in line:
@@ -33,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
             cmd_argv = line.split()
             cmd_argv[0], cmd_argv[1] = cmd_argv[1], cmd_argv[0]
             line = " ".join(cmd_argv)
-        return cmd.Cmd.precmd(self, line)
+        return super().precmd(line)
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
@@ -53,7 +53,7 @@ class HBNBCommand(cmd.Cmd):
             my_model = eval(arg + "()")
             my_model.save()
             print(my_model.id)
-        except:
+        except NameError:
             print("** class doesn't exist **")
 
     def do_show(self, arg):
@@ -64,7 +64,7 @@ class HBNBCommand(cmd.Cmd):
             return None
         try:
             eval(cmd_argv[0])
-        except:
+        except NameError:
             print("** class doesn't exist **")
             return None
 
@@ -89,13 +89,12 @@ class HBNBCommand(cmd.Cmd):
         if cmd_argv:
             try:
                 eval(cmd_argv[0])
-            except:
+            except NameError:
                 print("** class doesn't exist **")
                 return None
 
         all_objs = storage.all()
         print_list = []
-        len_objs = len(all_objs)
         for key, value in all_objs.items():
             if not cmd_argv:
                 if HBNBCommand.__all_117 == 0:
@@ -114,14 +113,16 @@ class HBNBCommand(cmd.Cmd):
         print("]")
 
     def do_destroy(self, arg):
-        """Deletes an instance based on its ID and saves the changes"""
+        """Deletes an instance based on its ID and saves the changes
+        Usage: destroy <class name> <id>
+        """
         cmd_argv = arg.split()
         if not cmd_argv:
             print("** class name missing **")
             return None
         try:
             eval(cmd_argv[0])
-        except:
+        except NameError:
             print("** class doesn't exist **")
             return None
 
@@ -141,7 +142,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_update(self, arg):
-        """Update instance attributes based on class name, ID, attribute name, and value"""
+        """Usage: update <class name> <id> <attribute name> <attribute value>"""
         cmd_argv = []
         part2_argv = []
         is_dict = 0
@@ -186,7 +187,7 @@ class HBNBCommand(cmd.Cmd):
 
         try:
             eval(cmd_argv[0])
-        except:
+        except NameError:
             print("** class doesn't exist **")
             return None
 
@@ -219,13 +220,13 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_count(self, arg):
-        """Count the number of instances of a class"""
+        """Usage: count <class name> or <class name>.count()"""
         cmd_argv = arg.split()
 
         if cmd_argv:
             try:
                 eval(cmd_argv[0])
-            except:
+            except NameError:
                 print("** class doesn't exist **")
                 return None
 
